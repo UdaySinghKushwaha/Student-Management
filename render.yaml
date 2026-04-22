@@ -1,16 +1,24 @@
-runtime: node
-env: nodejs
-envVars:
-  - key: MONGODB_URI
-    sync: false
-  - key: JWT_SECRET
-    sync: false
-  - key: NODE_ENV
-    value: production
-    sync: false
+services:
+  - type: web
+    name: student-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: NODE_ENV
+        value: production
 
-build:
-  command: npm install
-
-start:
-  command: npm start
+  - type: web
+    name: student-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://student-backend.onrender.com
