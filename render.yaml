@@ -1,0 +1,16 @@
+runtime: node
+env: nodejs
+envVars:
+  - key: MONGODB_URI
+    sync: false
+  - key: JWT_SECRET
+    sync: false
+  - key: NODE_ENV
+    value: production
+    sync: false
+
+build:
+  command: npm install
+
+start:
+  command: npm start
